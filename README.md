@@ -1,4 +1,4 @@
-# houzzAssesment-FullStackEngineer
+# Houzz FullStack Engineer Assesment
 
 ## Introduction
 
@@ -13,6 +13,12 @@ Link: [https://nodejs.org/en/download/]
 
 To setup the react, run the command
 ```npx create-react-app my-app```
+
+### Run the project
+
+Go inside the ```my-app/src``` and run the the command ```npm start```
+
+Note: Dont forget to ```npm install``` before ```npm start``` to install all the dependencies
 
 ## Project structure
 
