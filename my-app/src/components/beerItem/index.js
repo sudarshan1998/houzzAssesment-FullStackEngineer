@@ -14,7 +14,7 @@ const BeerItem = (props) => {
           <CCol md={10}>
             <CCardBody>
               <CCardTitle>{props.name}</CCardTitle>
-              <CCardText>{props.tagline}</CCardText>
+              <CCardText className='tagline'>{props.tagline}</CCardText>
               <CCardText>{props.description}</CCardText>
             </CCardBody>
           </CCol>

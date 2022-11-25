@@ -6,45 +6,46 @@ import "./index.css"
 import image from "../../images/houzz.png"
 
 function AddNewBeer() {
-  const [enteredName, setEnteredName] = useState("")
-  const [enteredGenre, setEnteredGenre] = useState("")
-  const [enteredDescription, setEnteredDescription] = useState("")
+  const [beerInfo, setBeerInfo] = useState({
+    name: "", genre: "", description: ""
+  })
+
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const[enteredNameIsValid, setEnteredNameIsValid] = useState(false)
-  const [enteredGenreIsValid, setEnteredGenreIsValid] = useState(false)
-  const [enteredDescriptionIsValid, setEnteredDescriptionIsValid] = useState(false)
 
-  const inputNameHandler = event => {
-    setEnteredName(event.target.value)
-  }
-
-  const inputGenreHandler = event => {
-    setEnteredGenre(event.target.value)
-  }
-  const inputDescriptionHandler = event => {
-    setEnteredDescription(event.target.value)
+  let name, value
+  const inputHandler = event => {
+    name = event.target.name
+    value = event.target.value
+    setBeerInfo({...beerInfo, [name]: value})
   }
 
   const formSubmitHandler = event => {
     event.preventDefault()
-    if (enteredName.trim() === "") {
-      setEnteredNameIsValid(false)
-      return
+    localStorage()
+  }
+
+  const localStorage = () => {
+    let beerArray = []
+    const localItems = JSON.parse(window.localStorage.getItem("beer"))
+    const ingredients = {
+      malt: "malt ingredient",
+      hop: "hop ingredient",
+      yeast: "yeast ingredient"
     }
-    if (enteredGenre.trim() === "") {
-      setEnteredGenreIsValid(false)
-      return
+    beerInfo.tagline = "Hanoi Beer"
+    beerInfo.image_url = "https://images.punkapi.com/v2/2.png"
+    beerInfo.ingredients = ingredients
+    if(localItems) {
+      localItems.map(item => {
+        return beerArray.push(item)
+      })
     }
-    if (enteredDescription.trim() === "") {
-      setEnteredDescriptionIsValid(false)
-      return
-    }
-    setEnteredNameIsValid(true)
-    setEnteredGenreIsValid(true)
-    setEnteredDescriptionIsValid(true)
+    beerArray.push(beerInfo)
+    console.log(beerArray)
+    window.localStorage.setItem("beer", JSON.stringify(beerArray))
   }
 
   return (
@@ -63,23 +64,23 @@ function AddNewBeer() {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Beer name</Form.Label>
               <Form.Control
-                onChange={inputNameHandler}
+                onChange={inputHandler}
                 type="text"
+                name="name"
                 placeholder="Beer name*"
-                value={enteredName}
+                value={beerInfo.name}
                 autoFocus
               />
-              {!enteredNameIsValid && <p className='error-text'>Beer name must not be empty.</p>}
             </Form.Group>
             <Form.Group>
               <Form.Label>Genre</Form.Label>
               <Form.Control
-                onChange={inputGenreHandler}
+                onChange={inputHandler}
                 type="text"
+                name="genre"
                 placeholder="Genre*"
-                value={enteredGenre}
+                value={beerInfo.genre}
               />
-              {!enteredGenreIsValid && <p className="error-text">Beer genre must not be empty.</p>}
             </Form.Group>
             <Form.Group
               className="mb-3"
@@ -87,12 +88,12 @@ function AddNewBeer() {
             >
             <Form.Label>Description*</Form.Label>
               <Form.Control 
-                onChange={inputDescriptionHandler}
+                onChange={inputHandler}
                 as="textarea" 
-                value={enteredDescription}
+                name="description"
+                value={beerInfo.description}
                 rows={3} 
               />
-              {!enteredDescriptionIsValid && <p className="error-text">Beer description must not be empty.</p>}
             </Form.Group>
             <Button variant="primary" className='saveButton' type = "submit" onClick={handleClose}>
               Save

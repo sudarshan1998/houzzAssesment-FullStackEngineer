@@ -9,7 +9,7 @@ API: ```https://punkapi.com/documentation/v2```
 ## Installation
 
 This is react application. Therefore, we need to have Node.js first. To setup the link follow:
-Link: [https://nodejs.org/en/download/]
+Link: https://nodejs.org/en/download/
 
 To setup the react, run the command
 ```npx create-react-app my-app```

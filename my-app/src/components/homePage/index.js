@@ -6,7 +6,6 @@ const  HomePage = () => {
   return (
     <Container>
     <Tabs
-    defaultActiveKey="allBeers"
     id="fill-tab-example"
     >
     <Tab eventKey="allBeers" title="All Beers">
